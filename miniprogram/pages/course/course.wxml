@@ -1,0 +1,30 @@
+<!--pages/course/course.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="title">精品课程</view>
+    <view class="subtitle">系统学习，快速提升</view>
+  </view>
+
+  <view class="course-list">
+    <view class="course-item" wx:for="{{courseList}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+      <view class="course-cover">
+        <view class="course-price">¥{{item.price}}</view>
+      </view>
+      <view class="course-info">
+        <view class="course-title">{{item.title}}</view>
+        <view class="course-desc">{{item.description}}</view>
+        <view class="course-meta">
+          <view class="meta-item">📚 {{item.lessonCount}}节课</view>
+          <view class="meta-item">👥 {{item.studentCount}}人学习</view>
+        </view>
+        <view class="course-buy" bindtap="buyCourse" data-id="{{item._id}}" data-price="{{item.price}}" catchtap="buyCourse">
+          立即购买
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{courseList.length === 0}}">
+      <view class="empty-icon">📚</view>
+      <view class="empty-text">暂无课程，管理员正在努力制作中...</view>
+    </view>
+  </view>
+</view>

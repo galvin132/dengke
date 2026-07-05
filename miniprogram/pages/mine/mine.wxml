@@ -1,0 +1,73 @@
+<!--pages/mine/mine.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="profile-section" bindtap="getUserProfile">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" />
+      <view class="profile-info">
+        <view class="nickname">{{userInfo.nickName || '点击登录'}}</view>
+        <view class="profile-desc">{{userInfo.nickName ? '欢迎回来！' : '登录后同步学习数据'}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="stats-card">
+    <view class="stats-item" bindtap="goToCheckin">
+      <view class="stats-num">{{checkinStreak}}</view>
+      <view class="stats-label">连续打卡</view>
+    </view>
+    <view class="stats-item" bindtap="goToKnowledge">
+      <view class="stats-num">{{knowledgeCount}}</view>
+      <view class="stats-label">知识条目</view>
+    </view>
+    <view class="stats-item" bindtap="goToPractice">
+      <view class="stats-num">{{practiceCount}}</view>
+      <view class="stats-label">练习题目</view>
+    </view>
+  </view>
+
+  <view class="menu-list">
+    <view class="menu-item" bindtap="goToOrders">
+      <view class="menu-icon">📦</view>
+      <view class="menu-text">我的订单</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="goToCourses">
+      <view class="menu-icon">📚</view>
+      <view class="menu-text">我的课程</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="goToRewards">
+      <view class="menu-icon">💰</view>
+      <view class="menu-text">我的打赏</view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="menu-list">
+    <view class="menu-item" bindtap="showAbout">
+      <view class="menu-icon">ℹ️</view>
+      <view class="menu-text">关于我们</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="contactService">
+      <view class="menu-icon">📞</view>
+      <view class="menu-text">联系客服</view>
+      <view class="menu-arrow">›</view>
+    </view>
+    <view class="menu-item" bindtap="shareApp">
+      <view class="menu-icon">🔗</view>
+      <view class="menu-text">分享给好友</view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="menu-list" wx:if="{{isAdmin}}">
+    <view class="menu-item" bindtap="goToAdmin">
+      <view class="menu-icon">⚙️</view>
+      <view class="menu-text">管理后台</view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <button class="share-btn" open-type="share">分享给好友</button>
+</view>

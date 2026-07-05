@@ -1,0 +1,62 @@
+<!--pages/cases/cases.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="title">案例分享</view>
+    <view class="add-btn" bindtap="showAddModal">+ 分享</view>
+  </view>
+
+  <view class="tabs">
+    <view class="tab {{currentTab === 'latest' ? 'active' : ''}}" bindtap="switchTab" data-tab="latest">最新</view>
+    <view class="tab {{currentTab === 'hot' ? 'active' : ''}}" bindtap="switchTab" data-tab="hot">热门</view>
+    <view class="tab {{currentTab === 'mine' ? 'active' : ''}}" bindtap="switchTab" data-tab="mine">我的</view>
+  </view>
+
+  <view class="list">
+    <view class="case-item" wx:for="{{caseList}}" wx:key="_id" bindtap="goToDetail" data-id="{{item._id}}">
+      <view class="case-header">
+        <view class="author-info">
+          <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}" />
+          <view class="author-name">{{item.nickName || '匿名用户'}}</view>
+        </view>
+        <view class="case-time">{{item.timeStr}}</view>
+      </view>
+      <view class="case-title">{{item.title}}</view>
+      <view class="case-content">{{item.content}}</view>
+      <view class="case-footer">
+        <view class="case-tag">{{item.tag}}</view>
+        <view class="case-actions">
+          <view class="action-item" catchtap="doLike" data-id="{{item._id}}">
+            ❤️ {{item.likeCount || 0}}
+          </view>
+          <view class="action-item">
+            💬 {{item.commentCount || 0}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{caseList.length === 0}}">
+      <view class="empty-icon">💡</view>
+      <view class="empty-text">暂无分享，来发布第一个吧！</view>
+    </view>
+  </view>
+</view>
+
+<!-- 发布弹窗 -->
+<view class="modal-mask" wx:if="{{showModal}}" bindtap="hideModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-title">分享学习案例</view>
+    <view class="form-item">
+      <input class="input" placeholder="标题" value="{{form.title}}" bindinput="onInput" data-field="title" />
+    </view>
+    <view class="form-item">
+      <textarea class="textarea" placeholder="分享你的学习经验、案例..." value="{{form.content}}" bindinput="onInput" data-field="content" maxlength="1000" />
+    </view>
+    <view class="form-item">
+      <input class="input" placeholder="标签（如：编程、职场、学习方法）" value="{{form.tag}}" bindinput="onInput" data-field="tag" />
+    </view>
+    <view class="modal-btns">
+      <view class="btn cancel" bindtap="hideModal">取消</view>
+      <view class="btn confirm" bindtap="submitCase">发布</view>
+    </view>
+  </view>
+</view>

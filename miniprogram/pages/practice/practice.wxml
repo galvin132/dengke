@@ -1,0 +1,72 @@
+<!--pages/practice/practice.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="title">AI 智能出题</view>
+    <view class="subtitle">根据知识库内容自动生成练习题</view>
+  </view>
+
+  <view class="config-card">
+    <view class="config-item">
+      <view class="config-label">选择知识库</view>
+      <picker mode="selector" range="{{knowledgeTitles}}" value="{{knowledgeIndex}}" bindchange="onKnowledgeChange">
+        <view class="picker">{{selectedKnowledge || '请选择知识库'}}</view>
+      </picker>
+    </view>
+    <view class="config-item">
+      <view class="config-label">题目数量</view>
+      <view class="count-selector">
+        <view class="count-btn {{questionCount === 5 ? 'active' : ''}}" bindtap="setCount" data-count="5">5题</view>
+        <view class="count-btn {{questionCount === 10 ? 'active' : ''}}" bindtap="setCount" data-count="10">10题</view>
+        <view class="count-btn {{questionCount === 20 ? 'active' : ''}}" bindtap="setCount" data-count="20">20题</view>
+      </view>
+    </view>
+    <view class="start-btn" bindtap="generateQuestions">开始出题</view>
+  </view>
+
+  <!-- 题目练习区域 -->
+  <view class="practice-area" wx:if="{{currentQuestion}}">
+    <view class="progress">第 {{currentIndex + 1}} / {{questions.length}} 题</view>
+    <view class="question-card">
+      <view class="question-type">{{currentQuestion.type === 'choice' ? '选择题' : '问答题'}}</view>
+      <view class="question-text">{{currentQuestion.question}}</view>
+      
+      <view class="options" wx:if="{{currentQuestion.type === 'choice'}}">
+        <view class="option {{selectedAnswer === index ? 'selected' : ''}} {{showAnswer && index === currentQuestion.correctIndex ? 'correct' : ''}} {{showAnswer && selectedAnswer === index && index !== currentQuestion.correctIndex ? 'wrong' : ''}}"
+              wx:for="{{currentQuestion.options}}" wx:key="index"
+              bindtap="selectAnswer" data-index="{{index}}">
+          <view class="option-label">{{['A','B','C','D'][index]}}</view>
+          <view class="option-text">{{item}}</view>
+        </view>
+      </view>
+
+      <view class="answer-area" wx:if="{{currentQuestion.type === 'text'}}">
+        <textarea class="answer-input" placeholder="请输入你的答案..." value="{{textAnswer}}" bindinput="onTextAnswer" />
+      </view>
+
+      <view class="action-btns">
+        <view class="btn" bindtap="showAnswerFn" wx:if="{{!showAnswer}}">查看答案</view>
+        <view class="btn next" bindtap="nextQuestion" wx:if="{{showAnswer || currentQuestion.type === 'text'}}">
+          {{currentIndex < questions.length - 1 ? '下一题' : '完成'}}
+        </view>
+      </view>
+
+      <view class="answer-card" wx:if="{{showAnswer}}">
+        <view class="answer-title">正确答案</view>
+        <view class="answer-content">{{currentQuestion.answer}}</view>
+        <view class="answer-explain" wx:if="{{currentQuestion.explanation}}">
+          <view class="explain-title">解析</view>
+          <view class="explain-content">{{currentQuestion.explanation}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 完成页面 -->
+  <view class="complete-card" wx:if="{{practiceComplete}}">
+    <view class="complete-icon">🎉</view>
+    <view class="complete-title">练习完成！</view>
+    <view class="complete-desc">本次共练习 {{questions.length}} 题</view>
+    <view class="complete-btn" bindtap="goToCheckin">去打卡</view>
+    <view class="complete-btn secondary" bindtap="restartPractice">再练一次</view>
+  </view>
+</view>

@@ -1,0 +1,54 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="greeting">你好，{{userInfo.nickName || '学习者'}}</view>
+    <view class="subtitle">今天也要坚持学习哦！</view>
+  </view>
+
+  <view class="stats-card">
+    <view class="stat-item">
+      <view class="stat-num">{{checkinStreak}}</view>
+      <view class="stat-label">连续打卡</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-num">{{knowledgeCount}}</view>
+      <view class="stat-label">知识条目</view>
+    </view>
+    <view class="stat-item">
+      <view class="stat-num">{{questionCount}}</view>
+      <view class="stat-label">已练题目</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">今日推荐</view>
+    <view class="card" wx:for="{{todayRecommend}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="card-title">{{item.title}}</view>
+      <view class="card-desc">{{item.desc}}</view>
+      <view class="card-tag">{{item.tag}}</view>
+    </view>
+    <view class="empty" wx:if="{{todayRecommend.length === 0}}">暂无推荐内容</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">快速入口</view>
+    <view class="quick-entry">
+      <view class="entry-item" bindtap="goToKnowledge">
+        <view class="entry-icon">📚</view>
+        <view class="entry-text">知识库</view>
+      </view>
+      <view class="entry-item" bindtap="goToCheckin">
+        <view class="entry-icon">✅</view>
+        <view class="entry-text">去打卡</view>
+      </view>
+      <view class="entry-item" bindtap="goToCases">
+        <view class="entry-icon">💡</view>
+        <view class="entry-text">案例分享</view>
+      </view>
+      <view class="entry-item" bindtap="goToAIPractice">
+        <view class="entry-icon">🤖</view>
+        <view class="entry-text">AI出题</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,69 @@
+<!--pages/checkin/checkin.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="streak-badge">
+      <view class="streak-num">{{streak}}</view>
+      <view class="streak-label">连续打卡天数</view>
+    </view>
+    <view class="calendar">
+      <view class="calendar-header">
+        <view class="cal-arrow" bindtap="prevMonth">‹</view>
+        <view class="cal-month">{{currentYear}}年{{currentMonth}}月</view>
+        <view class="cal-arrow" bindtap="nextMonth">›</view>
+      </view>
+      <view class="calendar-body">
+        <view class="cal-weekdays">
+          <view class="cal-weekday" wx:for="{{weekdays}}" wx:key="*this">{{item}}</view>
+        </view>
+        <view class="cal-days">
+          <view class="cal-day {{item.isToday ? 'today' : ''}} {{item.checked ? 'checked' : ''}} {{item.isEmpty ? 'empty' : ''}}"
+                wx:for="{{calendarDays}}" wx:key="index">
+            <view class="day-num" wx:if="{{!item.isEmpty}}">{{item.day}}</view>
+            <view class="check-dot" wx:if="{{item.checked}}">✓</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="today-card" wx:if="{{!todayChecked}}">
+    <view class="today-title">今日学习打卡</view>
+    <view class="today-desc">坚持学习，成就更好的自己！</view>
+    <view class="checkin-btn" bindtap="doCheckin">立即打卡</view>
+  </view>
+
+  <view class="today-card checked" wx:if="{{todayChecked}}">
+    <view class="today-title">✅ 今日已打卡</view>
+    <view class="today-desc">太棒了！继续保持哦～</view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">AI 出题练习</view>
+    <view class="ai-practice-card" bindtap="goToPractice">
+      <view class="ai-icon">🤖</view>
+      <view class="ai-info">
+        <view class="ai-title">根据知识库智能出题</view>
+        <view class="ai-desc">已练习 {{practiceCount}} 题</view>
+      </view>
+      <view class="ai-arrow">›</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">打卡统计</view>
+    <view class="stats-grid">
+      <view class="stats-item">
+        <view class="stats-num">{{totalCheckins}}</view>
+        <view class="stats-label">总打卡天数</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-num">{{streak}}</view>
+        <view class="stats-label">当前连续</view>
+      </view>
+      <view class="stats-item">
+        <view class="stats-num">{{maxStreak}}</view>
+        <view class="stats-label">最长连续</view>
+      </view>
+    </view>
+  </view>
+</view>

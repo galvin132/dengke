@@ -1,0 +1,203 @@
+/* pages/checkin/checkin.wxss */
+.container {
+  padding: 0 0 120rpx 0;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+.header {
+  background: linear-gradient(135deg, #4A90D9, #67B8F7);
+  padding: 40rpx;
+  color: #fff;
+}
+
+.streak-badge {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.streak-num {
+  font-size: 80rpx;
+  font-weight: bold;
+}
+
+.streak-label {
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+.calendar {
+  background: rgba(255,255,255,0.15);
+  border-radius: 20rpx;
+  padding: 30rpx;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.cal-month {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.cal-arrow {
+  font-size: 40rpx;
+  padding: 0 20rpx;
+}
+
+.cal-weekdays {
+  display: flex;
+}
+
+.cal-weekday {
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  opacity: 0.8;
+  padding: 10rpx 0;
+}
+
+.cal-days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cal-day {
+  width: 14.28%;
+  text-align: center;
+  padding: 10rpx 0;
+  position: relative;
+}
+
+.cal-day.today .day-num {
+  background: #fff;
+  color: #4A90D9;
+  border-radius: 50%;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin: 0 auto;
+}
+
+.cal-day.checked .day-num {
+  color: #67B8F7;
+}
+
+.check-dot {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18rpx;
+  color: #5cdb95;
+}
+
+.today-card {
+  margin: 30rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.08);
+}
+
+.today-card.checked {
+  background: linear-gradient(135deg, #f0fff4, #e8f8ef);
+}
+
+.today-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.today-desc {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 30rpx;
+}
+
+.checkin-btn {
+  background: linear-gradient(135deg, #4A90D9, #67B8F7);
+  color: #fff;
+  text-align: center;
+  padding: 24rpx;
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.section {
+  padding: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.ai-practice-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.ai-icon {
+  font-size: 60rpx;
+  margin-right: 20rpx;
+}
+
+.ai-info {
+  flex: 1;
+}
+
+.ai-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.ai-desc {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.ai-arrow {
+  font-size: 40rpx;
+  color: #ccc;
+}
+
+.stats-grid {
+  display: flex;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.05);
+}
+
+.stats-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stats-num {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #4A90D9;
+}
+
+.stats-label {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
